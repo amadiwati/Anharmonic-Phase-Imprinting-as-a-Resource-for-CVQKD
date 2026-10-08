@@ -1,0 +1,621 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[     23907,        600]
+NotebookOptionsPosition[     23980,        590]
+NotebookOutlinePosition[     24376,        606]
+CellTagsIndexPosition[     24333,        603]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "\n", 
+     RowBox[{"Joint", " ", 
+      RowBox[{"optimization", ":", 
+       RowBox[{
+        RowBox[{"maximize", " ", "the", " ", "phase"}], "-", 
+        RowBox[{"imprint", " ", "B"}]}]}]}]}], "=", 
+    RowBox[{
+     RowBox[{"gamma_eff", "*", 
+      RowBox[{"\[Zeta]", "^", "4"}], "*", 
+      RowBox[{"Np", "^", "3"}], " ", "subject", " ", "to", " ", "ALL", " ", 
+      RowBox[{"of", ":", "\n", 
+       RowBox[{"Cond", ".", "A"}]}]}], "=", 
+     RowBox[{
+      RowBox[{"gamma_eff", "*", 
+       RowBox[{"zeta", "^", "2"}], "*", 
+       RowBox[{"Np", "^", "2"}]}], "<=", 
+      RowBox[{"0.1", " ", 
+       RowBox[{"(", 
+        RowBox[{"self", "-", "consistency"}], ")"}], "\[IndentingNewLine]", 
+       RowBox[{"Gamma_cav", "/", "omega_eff"}]}], ">", 
+      RowBox[{"5", " ", 
+       RowBox[{"(", 
+        RowBox[{"bad", "-", 
+         RowBox[{"cavity", " ", "margin"}]}], ")"}], "\n", 
+       RowBox[{"Gamma0", "/", "Gamma_cav"}]}], "<", 
+      RowBox[{"0.05", " ", 
+       RowBox[{"(", 
+        RowBox[{"scattering", " ", "stays", " ", "small"}], ")"}], 
+       "\[IndentingNewLine]", "Scans", " ", "realistic", " ", "hardware", " ", 
+       RowBox[{"(", 
+        RowBox[{"Lambda", ",", "Delta_a", ",", "Gamma_cav"}], ")"}], " ", 
+       "AND", " ", "Np", " ", "together"}]}]}]}], ",", "\n", 
+   RowBox[{
+    RowBox[{
+    "rather", " ", "than", " ", "checking", " ", "one", " ", "axis", " ", 
+     "at", " ", "a", " ", "time", " ", "as", " ", 
+     RowBox[{"before", "."}]}], "\n", " ", "===", "===", "===", "===", "===", 
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "==="}]}], "*)"}]], "Input",
+ CellChangeTimes->{{4.0004784383220882`*^9, 
+  4.000478511041857*^9}},ExpressionUUID->"5ef512b3-3461-8b49-a60b-\
+4650cfff3e85"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"hbar", " ", "=", " ", 
+   RowBox[{"1.0545718", "*", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "34"}]]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"mYb", "  ", "=", " ", 
+   RowBox[{"174", "*", "1.66053907", "*", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "27"}]]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"aLat", " ", "=", " ", 
+   RowBox[{"185", "*", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "9"}]]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"omega0", " ", "=", " ", 
+   RowBox[{"2", " ", "Pi", "*", "364", "*", 
+    SuperscriptBox["10", "3"]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"\[Lambda]L", " ", "=", " ", 
+   RowBox[{"2", "*", "aLat"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"kL", " ", "=", " ", 
+   FractionBox[
+    RowBox[{"2", " ", "\[Pi]"}], "\[Lambda]L"]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Gamma]AtomMHz", " ", "=", " ", "20"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"\[Gamma]Eff", "[", "\[Kappa]_", "]"}], ":=", " ", 
+  FractionBox[
+   RowBox[{"(", 
+    RowBox[{"2", " ", 
+     SuperscriptBox["\[Pi]", "2"], " ", "\[Kappa]", " ", "hbar"}], ")"}], 
+   RowBox[{"(", 
+    RowBox[{"3", " ", 
+     RowBox[{"aLat", "^", "2"}], " ", "mYb", " ", "omega0", " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", " ", "-", " ", "\[Kappa]"}], ")"}], 
+      RowBox[{"(", 
+       RowBox[{"3", "/", "2"}], ")"}]]}], ")"}]]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[Omega]Eff", "[", "\[Kappa]_", "]"}], ":=", " ", 
+    RowBox[{"omega0", "*", 
+     SqrtBox[
+      RowBox[{"1", " ", "-", " ", "\[Kappa]"}]]}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"U0", "[", 
+    RowBox[{
+    "\[CapitalLambda]_", ",", " ", "\[CapitalDelta]a_", ",", " ", 
+     "\[Gamma]atom_"}], "]"}], ":=", " ", 
+   FractionBox[
+    RowBox[{
+     SuperscriptBox["\[CapitalLambda]", "2"], "*", "\[CapitalDelta]a"}], 
+    RowBox[{"(", 
+     RowBox[{
+      SuperscriptBox["\[CapitalDelta]a", "2"], " ", "+", " ", 
+      SuperscriptBox["\[Gamma]atom", "2"]}], ")"}]]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[CapitalGamma]0", "[", 
+    RowBox[{
+    "\[CapitalLambda]_", ",", " ", "\[CapitalDelta]a_", ",", " ", 
+     "\[Gamma]atom_"}], "]"}], ":=", " ", 
+   FractionBox[
+    RowBox[{
+     SuperscriptBox["\[CapitalLambda]", "2"], "*", "\[Gamma]atom"}], 
+    RowBox[{"(", 
+     RowBox[{
+      SuperscriptBox["\[CapitalDelta]a", "2"], " ", "+", " ", 
+      SuperscriptBox["\[Gamma]atom", "2"]}], ")"}]]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"gCoupling", "[", 
+    RowBox[{
+    "\[CapitalLambda]_", ",", " ", "\[CapitalDelta]a_", ",", " ", 
+     "\[Gamma]atom_", ",", " ", "\[Kappa]_"}], "]"}], ":=", "  ", 
+   RowBox[{
+    RowBox[{"U0", "[", 
+     RowBox[{
+     "\[CapitalLambda]", ",", " ", "\[CapitalDelta]a", ",", " ", 
+      "\[Gamma]atom"}], "]"}], "*", "kL", "*", 
+    SqrtBox[
+     FractionBox["hbar", 
+      RowBox[{"(", 
+       RowBox[{"mYb", "*", 
+        RowBox[{"omegaEff", "[", "\[Kappa]", "]"}]}], ")"}]]]}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[Zeta]", "[", 
+     RowBox[{
+     "\[CapitalLambda]_", ",", " ", "\[CapitalDelta]a_", ",", " ", 
+      "\[Gamma]atom_", ",", " ", "\[CapitalGamma]cav_", ",", " ", 
+      "\[Kappa]_"}], "]"}], ":=", " ", 
+    FractionBox[
+     RowBox[{"gCoupling", "[", 
+      RowBox[{
+      "\[CapitalLambda]", ",", " ", "\[CapitalDelta]a", ",", " ", 
+       "\[Gamma]atom", ",", " ", "\[Kappa]"}], "]"}], "\[CapitalGamma]cav"]}],
+    ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"conditionA", "[", 
+     RowBox[{"\[Gamma]e_", ",", " ", "\[Zeta]val_", ",", " ", "Np_"}], "]"}], 
+    ":=", " ", 
+    RowBox[{"\[Gamma]e", " ", 
+     SuperscriptBox["\[Zeta]val", "2"], " ", 
+     SuperscriptBox["Np", "2"]}]}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{"self", "-", 
+    RowBox[{"consistency", " ", "condition"}]}], "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"conditionB", "[", 
+     RowBox[{"\[Gamma]e_", ",", " ", "\[Zeta]val_", ",", " ", "Np_"}], "]"}], 
+    ":=", " ", 
+    RowBox[{"\[Gamma]e", " ", 
+     SuperscriptBox["\[Zeta]val", "4"], " ", 
+     SuperscriptBox["Np", "3"]}]}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Magnitude", " ", "of", " ", "phase"}], "-", 
+    RowBox[{"imprint", " ", 
+     RowBox[{"<<", " ", "1"}]}]}], "*)"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"kappaFixed", " ", "=", " ", "0.5"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"\[Gamma]eFixed", " ", "=", " ", 
+   RowBox[{"\[Gamma]Eff", "[", "kappaFixed", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"gAtomFixed", " ", "=", " ", 
+    RowBox[{"2", " ", "Pi", "*", "\[Gamma]AtomMHz", "*", 
+     SuperscriptBox["10", "6"]}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"hardwareGrid", " ", "=", " ", 
+    RowBox[{"Flatten", "[", "\n", "   ", 
+     RowBox[{
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+         "\[CapitalLambda]MHz", ",", " ", "DaGHz", ",", " ", "GcMHz"}], "}"}],
+         ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"\[CapitalLambda]MHz", ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"5", ",", " ", "10", ",", " ", "20", ",", " ", "50"}], 
+           "}"}]}], "}"}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"DaGHz", ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"0.5", ",", " ", "1", ",", " ", "2"}], "}"}]}], "}"}], ",",
+         " ", 
+        RowBox[{"{", 
+         RowBox[{"GcMHz", ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", " ", "5", ",", " ", "10"}], "}"}]}], "}"}]}], 
+       "]"}], ",", " ", "2"}], "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"NpGrid", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+     "2", ",", " ", "5", ",", " ", "10", ",", " ", "20", ",", " ", "30", ",", 
+      " ", "50", ",", " ", "100", ",", " ", "200"}], "}"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"allCombos", " ", "=", " ", 
+    RowBox[{"Flatten", "[", "\n", "   ", 
+     RowBox[{
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"\[CapitalLambda]", " ", "=", " ", 
+             RowBox[{"2", " ", "Pi", "*", 
+              RowBox[{"hw", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "*", 
+              SuperscriptBox["10", "6"]}]}], ",", " ", 
+            RowBox[{"Da", " ", "=", " ", 
+             RowBox[{"2", " ", "Pi", "*", 
+              RowBox[{"hw", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], "*", 
+              RowBox[{"10", "^", "9"}]}]}], ",", "\n", "       ", 
+            RowBox[{"Gc", " ", "=", " ", 
+             RowBox[{"2", " ", "Pi", "*", 
+              RowBox[{"hw", "[", 
+               RowBox[{"[", "3", "]"}], "]"}], "*", 
+              RowBox[{"10", "^", "6"}]}]}], ",", " ", "\[Zeta]val", ",", " ", 
+            "Aval", ",", " ", "Bval", ",", " ", "badCav", ",", " ", 
+            "scatRatio"}], "}"}], ",", "\n", "      ", 
+          RowBox[{
+           RowBox[{"\[Zeta]val", " ", "=", " ", 
+            RowBox[{"\[Zeta]", "[", 
+             RowBox[{
+             "\[CapitalLambda]", ",", " ", "Da", ",", " ", "gAtomFixed", ",", 
+              " ", "Gc", ",", " ", "kappaFixed"}], "]"}]}], ";", "\n", 
+           "      ", 
+           RowBox[{"Aval", " ", "=", " ", 
+            RowBox[{"N", "[", 
+             RowBox[{"conditionA", "[", 
+              RowBox[{
+              "\[Gamma]eFixed", ",", " ", "\[Zeta]val", ",", " ", "Npv"}], 
+              "]"}], "]"}]}], ";", "\n", "      ", 
+           RowBox[{"Bval", " ", "=", " ", 
+            RowBox[{"N", "[", 
+             RowBox[{"conditionB", "[", 
+              RowBox[{
+              "\[Gamma]eFixed", ",", " ", "\[Zeta]val", ",", " ", "Npv"}], 
+              "]"}], "]"}]}], ";", "\n", "      ", 
+           RowBox[{"badCav", " ", "=", " ", 
+            RowBox[{"N", "[", 
+             FractionBox["Gc", 
+              RowBox[{"\[Omega]Eff", "[", "kappaFixed", "]"}]], "]"}]}], ";", 
+           "\n", "      ", 
+           RowBox[{"scatRatio", " ", "=", " ", 
+            RowBox[{"N", "[", 
+             FractionBox[
+              RowBox[{"\[CapitalGamma]0", "[", 
+               RowBox[{
+               "\[CapitalLambda]", ",", " ", "Da", ",", " ", "gAtomFixed"}], 
+               "]"}], "Gc"], "]"}]}], ";", " ", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"hw", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+             RowBox[{"hw", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+             RowBox[{"hw", "[", 
+              RowBox[{"[", "3", "]"}], "]"}], ",", " ", "Npv", ",", " ", 
+             "\[Zeta]val", ",", " ", "Aval", ",", " ", "Bval", ",", " ", 
+             "badCav", ",", " ", "scatRatio"}], "}"}]}]}], "]"}], ",", "\n", 
+        "     ", 
+        RowBox[{"{", 
+         RowBox[{"hw", ",", " ", "hardwareGrid"}], "}"}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"Npv", ",", " ", "NpGrid"}], "}"}]}], "]"}], ",", " ", "1"}],
+      "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"safeCombos", " ", "=", " ", 
+    RowBox[{"Select", "[", 
+     RowBox[{"allCombos", ",", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "6", "]"}], "]"}], " ", "<=", " ", "0.1"}], " ", "&&",
+          " ", 
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "8", "]"}], "]"}], " ", ">", " ", "5"}], " ", "&&", 
+         " ", 
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "9", "]"}], "]"}], " ", "<", " ", "0.05"}]}], ")"}], 
+       " ", "&"}]}], "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"sortedSafe", " ", "=", " ", 
+    RowBox[{"SortBy", "[", 
+     RowBox[{"safeCombos", ",", " ", 
+      RowBox[{
+       RowBox[{"-", 
+        RowBox[{"#", "[", 
+         RowBox[{"[", "7", "]"}], "]"}]}], " ", "&"}]}], "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Combinations found satisfying ALL three constraints: \>\"", ",", 
+     "\n", " ", 
+     RowBox[{"Length", "[", "safeCombos", "]"}], ",", " ", "\"\< out of \>\"",
+      ",", " ", 
+     RowBox[{"Length", "[", "allCombos", "]"}], ",", " ", 
+     "\"\< total combinations checked.\>\""}], "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Length", "[", "safeCombos", "]"}], " ", ">", " ", "0"}], ",", 
+   "\n", "  ", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", 
+     "\"\<\\nTop candidates, sorted by phase-imprint B (descending):\>\"", 
+     "]"}], ";", "\n", "  ", 
+    RowBox[{"Print", "[", 
+     RowBox[{"TableForm", "[", 
+      RowBox[{
+       RowBox[{"sortedSafe", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", " ", ";;", " ", 
+          RowBox[{"Min", "[", 
+           RowBox[{"10", ",", " ", 
+            RowBox[{"Length", "[", "sortedSafe", "]"}]}], "]"}]}], "]"}], 
+        "]"}], ",", "\n", "    ", 
+       RowBox[{"TableHeadings", " ", "->", " ", 
+        RowBox[{"{", 
+         RowBox[{"None", ",", " ", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<\[CapitalLambda]/2\[Pi] (MHz)\>\"", ",", " ", 
+            "\"\<\[CapitalDelta]a/2\[Pi] (GHz)\>\"", ",", 
+            "\"\<\[CapitalGamma]cav/2\[Pi] (MHz)\>\"", ",", " ", "\"\<Np\>\"",
+             ",", " ", "\"\<\[Zeta]\>\"", ",", " ", "\"\<Cond.A\>\"", ",", 
+            " ", "\"\<Cond.B (B, rad)\>\"", ",", "\n", "      ", 
+            "\"\<\[CapitalGamma]cav/\[Omega]eff\>\"", ",", " ", 
+            "\"\<\[CapitalGamma]0/\[CapitalGamma]cav\>\""}], "}"}]}], 
+         "}"}]}]}], "]"}], "]"}]}], ",", "\n", "  ", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", 
+     "\"\<\\nNo combination satisfies all three constraints at once - report \
+the \\ \nbest available (largest B among those with Cond.A <= 0.1 alone) \
+instead:\>\"", "]"}], ";", "\n", "  ", 
+    RowBox[{"Print", "[", 
+     RowBox[{"TableForm", "[", "\n", "    ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"SortBy", "[", 
+         RowBox[{
+          RowBox[{"Select", "[", 
+           RowBox[{"allCombos", ",", " ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "6", "]"}], "]"}], " ", "<=", " ", "0.1"}], " ", 
+             "&"}]}], "]"}], ",", " ", 
+          RowBox[{
+           RowBox[{"-", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "7", "]"}], "]"}]}], " ", "&"}]}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"1", " ", ";;", " ", "10"}], "]"}], "]"}], ",", "\n", "    ", 
+       RowBox[{"TableHeadings", " ", "->", " ", 
+        RowBox[{"{", 
+         RowBox[{"None", ",", " ", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<g0/2\[Pi] (MHz)\>\"", ",", " ", 
+            "\"\<\[CapitalDelta]a/2\[Pi] (GHz)\>\"", ",", 
+            "\"\<\[CapitalGamma]cav/2\[Pi] (MHz)\>\"", ",", " ", "\"\<Np\>\"",
+             ",", " ", "\"\<\[Zeta]\>\"", ",", " ", "\"\<Cond.A\>\"", ",", 
+            " ", "\"\<Cond.B (B, rad)\>\"", ",", "\n", "      ", 
+            "\"\<\[CapitalGamma]cav/\[Omega]eff\>\"", ",", " ", 
+            "\"\<\[CapitalGamma]0/\[CapitalGamma]cav\>\""}], "}"}]}], 
+         "}"}]}]}], "]"}], "]"}]}]}], "]"}]}], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{4.0004751517849464`*^9, 4.0004751899770107`*^9}, {
+  4.000475297583084*^9, 4.000475371418228*^9}, {4.0004754067748184`*^9, 
+  4.0004754614754047`*^9}, {4.00047549531839*^9, 4.000475687004839*^9}, {
+  4.0004757313474407`*^9, 4.0004759652028255`*^9}, {4.0004760190592823`*^9, 
+  4.0004761041866474`*^9}, {4.0004762231555767`*^9, 4.000476262334236*^9}, {
+  4.000476350012142*^9, 4.0004763624566803`*^9}, {4.0004764346839275`*^9, 
+  4.0004764701392384`*^9}, {4.0004767698930283`*^9, 4.000476850081766*^9}, {
+  4.000476883260687*^9, 4.000476943118578*^9}, {4.000476988759409*^9, 
+  4.0004769941232586`*^9}, {4.000477114256996*^9, 4.0004771721327515`*^9}, {
+  4.0004772093442917`*^9, 4.000477235977724*^9}, {4.000477281064049*^9, 
+  4.0004772817576885`*^9}, {4.0004777301750736`*^9, 4.000477797826664*^9}, {
+  4.0004779815845757`*^9, 4.0004779956045685`*^9}, {4.0004783870875854`*^9, 
+  4.000478425588253*^9}},ExpressionUUID->"78db9667-8a2d-6044-9f3b-\
+12ddfed7277e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Combinations found satisfying ALL three constraints: \"\>", 
+   "\[InvisibleSpace]", "155", "\[InvisibleSpace]", "\<\" out of \"\>", 
+   "\[InvisibleSpace]", "288", 
+   "\[InvisibleSpace]", "\<\" total combinations checked.\"\>"}],
+  SequenceForm[
+  "Combinations found satisfying ALL three constraints: ", 155, " out of ", 
+   288, " total combinations checked."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  4.0004751940191555`*^9, 4.000475336155657*^9, {4.00047539443458*^9, 
+   4.0004754200873814`*^9}, 4.0004754526334667`*^9, {4.0004755986672077`*^9, 
+   4.000475624483124*^9}, 4.000475691789116*^9, 4.000475775874609*^9, 
+   4.000475836168352*^9, {4.00047589793804*^9, 4.0004759255156536`*^9}, 
+   4.000475991073618*^9, {4.000476067258028*^9, 4.000476087173132*^9}, 
+   4.0004762276033382`*^9, 4.0004763684045086`*^9, 4.00047647408317*^9, {
+   4.000476846853388*^9, 4.0004768513981304`*^9}, 4.000476884944927*^9, 
+   4.000476998432951*^9, {4.0004771305777397`*^9, 4.000477155541609*^9}, {
+   4.0004772205628376`*^9, 4.000477238778679*^9}, 4.0004772830607815`*^9, 
+   4.000477802470989*^9, 4.0004780018886166`*^9},
+ CellLabel->
+  "During evaluation of \
+In[876]:=",ExpressionUUID->"c9a29ec9-18e3-de48-a9ea-617d354fdb34"],
+
+Cell[BoxData["\<\"\\nTop candidates, sorted by phase-imprint B \
+(descending):\"\>"], "Print",
+ CellChangeTimes->{
+  4.0004751940191555`*^9, 4.000475336155657*^9, {4.00047539443458*^9, 
+   4.0004754200873814`*^9}, 4.0004754526334667`*^9, {4.0004755986672077`*^9, 
+   4.000475624483124*^9}, 4.000475691789116*^9, 4.000475775874609*^9, 
+   4.000475836168352*^9, {4.00047589793804*^9, 4.0004759255156536`*^9}, 
+   4.000475991073618*^9, {4.000476067258028*^9, 4.000476087173132*^9}, 
+   4.0004762276033382`*^9, 4.0004763684045086`*^9, 4.00047647408317*^9, {
+   4.000476846853388*^9, 4.0004768513981304`*^9}, 4.000476884944927*^9, 
+   4.000476998432951*^9, {4.0004771305777397`*^9, 4.000477155541609*^9}, {
+   4.0004772205628376`*^9, 4.000477238778679*^9}, 4.0004772830607815`*^9, 
+   4.000477802470989*^9, 4.000478001908407*^9},
+ CellLabel->
+  "During evaluation of \
+In[876]:=",ExpressionUUID->"5f5a0f5c-d49d-154b-81f3-823740eb4945"],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      TagBox["\<\"\[CapitalLambda]/2\[Pi] (MHz)\"\>",
+       HoldForm], 
+      TagBox["\<\"\[CapitalDelta]a/2\[Pi] (GHz)\"\>",
+       HoldForm], 
+      TagBox["\<\"\[CapitalGamma]cav/2\[Pi] (MHz)\"\>",
+       HoldForm], 
+      TagBox["\<\"Np\"\>",
+       HoldForm], 
+      TagBox["\<\"\[Zeta]\"\>",
+       HoldForm], 
+      TagBox["\<\"Cond.A\"\>",
+       HoldForm], 
+      TagBox["\<\"Cond.B (B, rad)\"\>",
+       HoldForm], 
+      TagBox["\<\"\[CapitalGamma]cav/\[Omega]eff\"\>",
+       HoldForm], 
+      TagBox["\<\"\[CapitalGamma]0/\[CapitalGamma]cav\"\>",
+       HoldForm]},
+     {"50", "0.5`", "5", "5", "0.2547062518060332`", "0.07037133678615141`", 
+      "0.022826799028233227`", "19.426010472157895`", "0.03993610223642174`"},
+     {"50", "1", "5", "10", "0.12750588854904177`", "0.07054026171867243`", 
+      "0.011468260538567431`", "19.426010472157895`", "0.009996001599360257`"},
+     {"50", "0.5`", "10", "10", "0.1273531259030166`", "0.07037133678615141`",
+       "0.011413399514116613`", "38.85202094431579`", "0.01996805111821087`"},
+     {"50", "2", "5", "20", "0.06377206824540617`", "0.07058258799106519`", 
+      "0.005741013634010333`", "19.426010472157895`", 
+      "0.0024997500249975004`"},
+     {"50", "1", "10", "20", "0.06375294427452088`", "0.07054026171867243`", 
+      "0.005734130269283716`", "38.85202094431579`", "0.004998000799680128`"},
+     {"20", "0.5`", "5", "30", "0.04075300028896531`", "0.06485422398211714`",
+       "0.003231310538406872`", "19.426010472157895`", 
+      "0.006389776357827477`"},
+     {"50", "0.5`", "5", "2", "0.2547062518060332`", "0.011259413885784227`", 
+      "0.0014609151378069266`", "19.426010472157895`", "0.03993610223642174`"},
+     {"50", "1", "5", "5", "0.12750588854904177`", "0.01763506542966811`", 
+      "0.001433532567320929`", "19.426010472157895`", "0.009996001599360257`"},
+     {"50", "0.5`", "10", "5", "0.1273531259030166`", "0.017592834196537854`",
+       "0.0014266749392645767`", "38.85202094431579`", "0.01996805111821087`"},
+     {"50", "2", "10", "30", "0.031886034122703084`", "0.03970270574497417`", 
+      "0.0012109950634240545`", "38.85202094431579`", "0.0012498750124987502`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+    GridBoxDividers->{
+     "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[2.0999999999999996`]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}],
+   {None, OutputFormsDump`HeadedColumns}],
+  Function[BoxForm`e$, 
+   TableForm[
+   BoxForm`e$, 
+    TableHeadings -> {
+     None, {"\[CapitalLambda]/2\[Pi] (MHz)", "\[CapitalDelta]a/2\[Pi] (GHz)", 
+       "\[CapitalGamma]cav/2\[Pi] (MHz)", "Np", "\[Zeta]", "Cond.A", 
+       "Cond.B (B, rad)", "\[CapitalGamma]cav/\[Omega]eff", 
+       "\[CapitalGamma]0/\[CapitalGamma]cav"}}]]]], "Print",
+ CellChangeTimes->{
+  4.0004751940191555`*^9, 4.000475336155657*^9, {4.00047539443458*^9, 
+   4.0004754200873814`*^9}, 4.0004754526334667`*^9, {4.0004755986672077`*^9, 
+   4.000475624483124*^9}, 4.000475691789116*^9, 4.000475775874609*^9, 
+   4.000475836168352*^9, {4.00047589793804*^9, 4.0004759255156536`*^9}, 
+   4.000475991073618*^9, {4.000476067258028*^9, 4.000476087173132*^9}, 
+   4.0004762276033382`*^9, 4.0004763684045086`*^9, 4.00047647408317*^9, {
+   4.000476846853388*^9, 4.0004768513981304`*^9}, 4.000476884944927*^9, 
+   4.000476998432951*^9, {4.0004771305777397`*^9, 4.000477155541609*^9}, {
+   4.0004772205628376`*^9, 4.000477238778679*^9}, 4.0004772830607815`*^9, 
+   4.000477802470989*^9, 4.0004780019233704`*^9},
+ CellLabel->
+  "During evaluation of \
+In[876]:=",ExpressionUUID->"fa5bc220-09b6-664f-82da-95efea893d0f"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{949, 461},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.1 for Microsoft Windows (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9bee93d0-03e7-634e-b313-82a29421def9"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[1460, 33, 2060, 48, 161, "Input",ExpressionUUID->"5ef512b3-3461-8b49-a60b-4650cfff3e85"],
+Cell[CellGroupData[{
+Cell[3545, 85, 14302, 378, 1226, "Code",ExpressionUUID->"78db9667-8a2d-6044-9f3b-12ddfed7277e",
+ InitializationCell->False],
+Cell[CellGroupData[{
+Cell[17872, 467, 1282, 23, 22, "Print",ExpressionUUID->"c9a29ec9-18e3-de48-a9ea-617d354fdb34"],
+Cell[19157, 492, 930, 15, 39, "Print",ExpressionUUID->"5f5a0f5c-d49d-154b-81f3-823740eb4945"],
+Cell[20090, 509, 3862, 77, 174, "Print",ExpressionUUID->"fa5bc220-09b6-664f-82da-95efea893d0f"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
